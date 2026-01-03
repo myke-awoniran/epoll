@@ -43,14 +43,6 @@ impl Poll {
         unsafe { events.set_len(res as usize) };
         Ok(())
     }
-
-    pub fn drop(&mut self) {
-        let res = unsafe { ffi::close(self.registry.raw_fd) };
-        if res < 0 {
-            let error = io::Error::last_os_error();
-            eprintln!("Error closing epoll fd: {:?}", error);
-        };
-    }
 }
 
 #[derive(Debug)]
@@ -77,6 +69,10 @@ impl Drop for Registry {
     /*when a poll instance is dropped, it may also
     cancel in-flight operations for registered event sources*/
     fn drop(&mut self) {
-        todo!()
+        let res = unsafe { ffi::close(self.raw_fd) };
+        if res < 0 {
+            let error = io::Error::last_os_error();
+            eprintln!("Error closing epoll fd: {:?}", error);
+        };
     }
 }

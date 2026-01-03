@@ -22,3 +22,5 @@ that information would simply return immediately with the data, so forcing a con
 rescheduling of the current task might be less efficient than just handling the data synchronously.
 The problem is that there is no way to know for sure whether I/O is blocking and it depends on what
 you’re doing."
+
+

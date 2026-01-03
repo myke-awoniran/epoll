@@ -1,6 +1,6 @@
 FROM rust:1-slim-bookworm
 
-WORKDIR /usr/a-epoll
+WORKDIR /usr/epoll
 
 COPY . .
 

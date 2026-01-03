@@ -29,6 +29,10 @@ fn handle_events(
         loop {
             match streams[index].read(&mut data) {
                 Ok(n) if n == 0 => {
+                    if !handled_ids.insert(index) {
+                        break;
+                    }
+
                     handled_events += 1;
                     break;
                 }
